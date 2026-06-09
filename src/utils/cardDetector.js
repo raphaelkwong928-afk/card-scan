@@ -92,8 +92,8 @@ function findColCuts(rawVp, W, x0, x1) {
     const prev = i > 1 ? x0 + (i - 1) * step : x0;
     const next = i < estCols - 1 ? x0 + (i + 1) * step : x1;
     const mid = (prev + next) / 2;
-    const a = Math.max(x0, Math.round(mid - 100));
-    const b = Math.min(W, Math.round(mid + 100));
+    const a = Math.max(x0, Math.round(mid - 200));
+    const b = Math.min(W, Math.round(mid + 200));
     let minPos = a;
     let minVal = Infinity;
     for (let x = a; x < b; x++) {
