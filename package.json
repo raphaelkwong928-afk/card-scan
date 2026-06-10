@@ -2,11 +2,15 @@
   "name": "business-card-scanner",
   "private": true,
   "version": "1.0.0",
-  "type": "module",
+  "description": "Client-side business card scanner with OCR, multi-card detection, and Excel export",
+  "main": "electron/main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "electron:dev": "node electron/main.js",
+    "electron:build": "vite build && electron-builder --win --dir",
+    "electron:dist": "vite build && electron-builder --win"
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
@@ -20,6 +24,36 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
+    "electron": "^42.4.0",
+    "electron-builder": "^26.15.2",
     "vite": "^5.1.4"
+  },
+  "build": {
+    "appId": "com.cardscan.app",
+    "productName": "CardScan",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "electron/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CardScan"
+    }
   }
 }
