@@ -11,18 +11,18 @@ function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
-    icon: path.join(__dirname, 'icon.png'),
     title: 'CardScan',
   });
 
-  // Load the built web app
+  const indexPath = path.join(__dirname, '../dist/index.html');
+
   if (process.env.NODE_ENV === 'development') {
     win.loadURL('http://localhost:5173');
   } else {
-    win.loadFile(path.join(__dirname, '../dist/index.html'));
+    // Use file:// URL so relative asset paths in index.html resolve correctly
+    win.loadURL(`file://${indexPath}`);
   }
 
-  // Remove default menu bar for cleaner look
   Menu.setApplicationMenu(null);
 }
 
